@@ -3,8 +3,8 @@ puts <<-INS
 
   Getting started: 
   1. Create .env file in root folder
-  2. Inside your .env file, add the client id of your application
-     e.g.; CLIENT_ID: 'webjwhe89237cusbdjyuwev723'
+  2. Inside your .env file, add your ACCESS_TOKEN
+     e.g.; ACCESS_TOKEN: 'webjwhe89237cusbdjyuwev723'
   3. Choose an option to follow users or like images
 
   Have fun!
@@ -13,7 +13,7 @@ puts <<-INS
 INS
 
 require_relative 'instagram'
-instagram = Instagram.new(access_token: ENV['CLIENT_ID'])
+instagram = Instagram.new(access_token: ENV['ACCESS_TOKEN'])
 
 puts <<-OPTION
 

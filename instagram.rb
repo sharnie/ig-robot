@@ -49,7 +49,7 @@ class Instagram
   # Modify the relationship between the current user and the target user.
   # Action follow/unfollow/block/unblock/approve/deny.
   # https://api.instagram.com/v1/users/1574083/relationship?access_token=ACCESS-TOKEN
-  def relationship action
+  def modify_relationship action
     File.open(@user_id_list, 'r') do |file|
       file.each do |user_id|
         url = API + "users/#{user_id.gsub(/(\n|,)$/, "")}/relationship?access_token=" + @access_token
@@ -61,28 +61,35 @@ class Instagram
     end
   end
 
+  # Get information about a relationship to another user.
+  # https://api.instagram.com/v1/users/1574083/relationship?access_token=ACCESS-TOKEN
+  def get_relationship user_id
+    url = API + "users/#{user_id}/relationship?access_token=" + @access_token
+    get(url)
+  end
+
   # Search for a user by name
   # https://api.instagram.com/v1/users/search?q=jack&access_token=ACCESS-TOKEN
   def user_search username
     url = API + "users/search?q=#{username}&access_token=" + @access_token
-    get(url)['data'].first['id']
+    get(url)['data']
   end
 
   def follow_user_followers username
-    user_id = user_search(username)
-    user_followers(user_id)
-    relationship("follow")
+    users = user_search(username)
+    user_followers(users.first['id'])
+    modify_relationship("follow")
   end
 
   def follow_user_following username
-    user_id = user_search(username)
-    user_follows(user_id)
-    relationship("follow")
+    users = user_search(username)
+    user_follows(users.first['id'])
+    modify_relationship("follow")
   end
 
   def follow_user_by_tag tag_name, pages
     tag_user_id(tag_name, pages: pages)
-    relationship("follow")
+    modify_relationship("follow")
   end
 
   #################
