@@ -1,30 +1,17 @@
-puts <<-INS
-##############################################################
-
-  Getting started: 
-  1. Create .env file in root folder
-  2. Inside your .env file, add your ACCESS_TOKEN
-     e.g.; ACCESS_TOKEN: 'webjwhe89237cusbdjyuwev723'
-  3. Choose an option to follow users or like images
-
-  Have fun!
-
-##############################################################
-INS
-
 require_relative 'instagram'
 instagram = Instagram.new(access_token: ENV['ACCESS_TOKEN'])
 
 puts <<-OPTION
+##############################################################
 
 
-->  Choose an option:
-    - like
-    - follow
-    - exit
+->  Choose an option to follow users or like images
+    # like
+    # follow
+    # exit
 
 
-
+##############################################################
 OPTION
 
 def rinse
