@@ -1,4 +1,4 @@
-ig-robot
+IG ROBOT
 ========
 
 A marketing tool for Instagram.
